@@ -1,0 +1,16 @@
+{
+  "name": "node-ooyala",
+  "version": "1.0.0",
+  "description": "A library for connectin to the Ooyala API",
+  "main": "ooyala.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wouter van de Molengraft",
+  "repository": "https://github.com/woutervdm/node-ooyala.git",
+  "license": "ISC",
+  "dependencies": {
+    "merge": "^1.2.0",
+    "request": "^2.69.0"
+  }
+}
