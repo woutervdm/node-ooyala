@@ -21,17 +21,19 @@ module.exports = function(options)
 			str += key +'=' + params[key];
 		});
 
-		str += body || '';
-
 		var hash = crypto.createHash('sha256');
 		hash.update(str);
+		if (body)
+		{
+			hash.update(body);
+		}
 
 		return hash.digest('base64').substr(0,43).replace(/=+$/, '');
 	};
 
 	var doRequest = function(method, path, params, body, callback)
 	{
-		var usedParams = merge({
+		var usedParams = merge({}, {
 			api_key: options.api_key,
 			expires: Math.floor((new Date()).getTime()/1000) + options.expirationTime
 		}, params);
@@ -93,7 +95,7 @@ module.exports = function(options)
 			doRequest.apply(null, [method.toUpperCase()].concat([
 				path,
 				typeof params == 'function' ? {} : params,
-				typeof body == 'function'  || !body ? '' : JSON.stringify(body),
+				typeof body == 'function'  || !body ? '' : (typeof body != 'string' && !body instanceof Buffer ? JSON.stringify(body) : body),
 				[].slice.apply(arguments, [-1])[0]
 			]));
 		};
