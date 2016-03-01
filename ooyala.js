@@ -95,7 +95,7 @@ module.exports = function(options)
 			doRequest.apply(null, [method.toUpperCase()].concat([
 				path,
 				typeof params == 'function' ? {} : params,
-				typeof body == 'function'  || !body ? '' : (typeof body != 'string' && !body instanceof Buffer ? JSON.stringify(body) : body),
+				typeof body == 'function'  || !body ? '' : (typeof body != 'string' && !(body instanceof Buffer) ? JSON.stringify(body) : body),
 				[].slice.apply(arguments, [-1])[0]
 			]));
 		};
